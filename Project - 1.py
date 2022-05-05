@@ -9,7 +9,6 @@ print("Hi there!!")
 cursor.execute("SELECT * FROM LOGIN ;")
 L=[]
 M=list(cursor.fetchall())
-#print(M)
 def abcd():
       koi=input("Please enter username:")
       zab=44
@@ -145,12 +144,7 @@ def owner():
                   conn.commit()
                   print("Added")
                    
-       
-##                  print("                             BOOKING TABLE")
-##                  cursor.execute("SELECT * FROM BOOKING;")
-##                  cccgf=cursor.fetchall()
-##                  for nani in cccgf:
-##                        print(list(nani))
+
                   cz=1
                   while cz==1:
                         napss=input("Start_Date(Write in YYYY-MM-DD Format)")
@@ -160,20 +154,7 @@ def owner():
                               break
                         else:
                               print("The dates youn have entered are not logically possible.Please try again!")
-##                  donkey=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s;")
-##                  yuo=input("Booking Id:")
-##                  
-##                  cursor.execute(donkey,yuo)
-##                  cccgf=cursor.fetchall()
-##                  for nani in cccgf:
-##                        MK=list(nani)
-##                  mnm="SELECT ROOM_ID FROM ROOM WHERE napss AND napsss NOT BETWEEN %s AND %s"
-##                  nnnmsl=MK[1]
-##                  MMAS=MK[2]
-##                  Valllll=(nnnmsl,MMAS)
-##                  cursor.execute(mnm,Valllll)
-##                  xox=cursor.fetchall()
-##                  print(xox)
+
 
                   
                   print("                             BOOKING TABLE")
@@ -195,10 +176,7 @@ def owner():
                   OOM=cursor.fetchall()
                   for nanI in OOM:
                         print(nani)
-##                        MK=list(nani)
-##                  print(MK,"AHH")
-                   #napsssss=input("Customer Id")
-#                  cursor.execute("Select * from Booking;")
+
                   baby=(naps,napss,napsss,napssss,VA)
                   xxx="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
                    
@@ -513,11 +491,7 @@ def Employee():
                   print("Added")
                    
        
-##                  print("                             BOOKING TABLE")
-##                  cursor.execute("SELECT * FROM BOOKING;")
-##                  cccgf=cursor.fetchall()
-##                  for nani in cccgf:
-##                        print(list(nani))
+
                   cz=1
                   while cz==1:
                         napss=input("Start_Date(Write in YYYY-MM-DD Format)")
@@ -527,20 +501,7 @@ def Employee():
                               break
                         else:
                               print("The dates youn have entered are not logically possible.Please try again!")
-##                  donkey=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s;")
-##                  yuo=input("Booking Id:")
-##                  
-##                  cursor.execute(donkey,yuo)
-##                  cccgf=cursor.fetchall()
-##                  for nani in cccgf:
-##                        MK=list(nani)
-##                  mnm="SELECT ROOM_ID FROM ROOM WHERE napss AND napsss NOT BETWEEN %s AND %s"
-##                  nnnmsl=MK[1]
-##                  MMAS=MK[2]
-##                  Valllll=(nnnmsl,MMAS)
-##                  cursor.execute(mnm,Valllll)
-##                  xox=cursor.fetchall()
-##                  print(xox)
+
 
                   
                   print("                             BOOKING TABLE")
@@ -562,10 +523,7 @@ def Employee():
                   OOM=cursor.fetchall()
                   for nanI in OOM:
                         print(nani)
-##                        MK=list(nani)
-##                  print(MK,"AHH")
-                   #napsssss=input("Customer Id")
-#                  cursor.execute("Select * from Booking;")
+
                   baby=(naps,napss,napsss,napssss,VA)
                   xxx="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
                    
@@ -652,34 +610,7 @@ def Employee():
             break
  
 
-##cursor.execute("SELECT * FROM LOGIN;")
-##L1=[]
-##M1=cursor.fetchall()
-##for x in M1:
-##     L1.append(x[3])
-##     print(L1)
-##     if L1[u]=="ADMIN":
-##          owner()
-##     else:
-##          Employee()
-   
-##def username():
-##    i=input("Please enter username:")
-##
-##    if i in L:
-##        print("Welcome",i)
-##         
-##    elif i not in L:
-##        print("Invalid Username!")
-##        p=input("Do you want to retry:(y/n)")
-##        if p.upper=="Y":
-##                 username()
-##        else:
-##            print("Proceeding...")
-##            print("Thanks!")
-##             
-##username()            
-# NOTE: PUT STRIP FUNCTION ON EACH INPUT TO AVOID ERROR FROM USERS    
+
 if aah=="ADMIN":
         owner()
 if aah=="EMPLOYEE":
