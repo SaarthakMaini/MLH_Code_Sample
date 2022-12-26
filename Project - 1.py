@@ -1,42 +1,41 @@
 import pymysql
-vvvv=input("Please enter your SQL server username:")
-uuuu=input("Please enter your SQL server password:")
-conn=pymysql.connect(host="localhost",user=vvvv,password=uuuu,database="PROJECT")
+user_name=input("Please enter your SQL server username:")
+passw=input("Please enter your SQL server password:")
+conn=pymysql.connect(host="localhost",user=user_name,password=passw,database="PROJECT")
 cursor=conn.cursor()
 print("--------------------------------------------------------------------------------")
-print("Program Begins")
 print("Hi there!!") 
 cursor.execute("SELECT * FROM LOGIN ;")
 L=[]
 M=list(cursor.fetchall())
-def abcd():
-      koi=input("Please enter username:")
-      zab=44
-      ccccc=1
-      while zab==44:
+def login():
+      input_by_user=input("Please enter username:")
+      flag=44
+      flag2=1
+      while flag==44:
           for x in M:
-                     if koi==x[1]:
-                         while ccccc==1:
-                             zz=input("Please enter password:")
-                             if zz==x[2]:
+                     if input_by_user==x[1]:
+                         while flag2==1:
+                             password_inputted=input("Please enter password:")
+                             if password_inputted==x[2]:
                                  print("Welcome",x[1])
                                  print("You have logined as ",x[3])
-                                 global aah
-                                 aah=x[3]
-                                 ccccc=2
+                                 global logged_in_user
+                                 logged_in_user=x[3]
+                                 flag2=2
                                  
                              else:
                                  print("Wrong password.Please try again!")
-          zab=2                      
-      if ccccc==1:
+          flag=2                      
+      if flag2==1:
           print("No such username exists")
-          yyyy=input("Press 1 to try again\nPress 2 to exit")
-          if yyyy==2:
+          option_to_stay=input("Press 1 to try again\nPress 2 to exit")
+          if option_to_stay==2:
               conn.close()
           else:
-              koi=yyyy
-              abcd()
-abcd()
+              input_by_user=option_to_stay
+              login()
+login()
         
     
 def cust():
@@ -44,7 +43,7 @@ def cust():
       M=cursor.fetchall()
       for x in M:
            print(list(x))
-      poi="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
+      cust_query="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
       VA=input("Cust_Id:")
       VAL=input("Cust_Name:")
       valu=input("Age_18_Above:")
@@ -54,7 +53,7 @@ def cust():
       value=(VA,VAL,valu,vv,vvv,vvvv)
       
      
-      cursor.execute(poi,value)
+      cursor.execute(cust_query,value)
       conn.commit()
       print("Added")
 def owner():
@@ -72,19 +71,19 @@ def owner():
            for x in M:
                 print("[",x[1],"]",end="\n")
          
-           poi=input("Employee name:")
+           emp_name=input("Employee name:")
            h="DELETE FROM EMPLOYEE WHERE E_NAME=%s"
-           adr=(poi,)
+           adr=(emp_name,)
            
            cursor.execute(h,adr)
            print("Deleted")
        if pl==3:
-           poi="INSERT INTO EMPLOYEE(E_Id,E_NAME,SALARY) VALUES(%s,%s,%s)"
+           emp_query="INSERT INTO EMPLOYEE(E_Id,E_NAME,SALARY) VALUES(%s,%s,%s)"
            VA=input("E_Id:")
            VAL=input("E_NAME:")
            valu=input("Salary:")
            value=(VA,VAL,valu)
-           cursor.execute(poi,value)
+           cursor.execute(emp_query,value)
            conn.commit()
            print("Added")
        if pl==4:
@@ -92,7 +91,7 @@ def owner():
                  M=cursor.fetchall()
                  for x in M:
                        print(list(x))
-                 poi="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
+                 cust_query="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
                  VA=input("Cust_Id:")
                  VAL=input("Cust_Name:")
                  valu=input("Age_18_Above:")
@@ -101,7 +100,7 @@ def owner():
                  vvvv=input("Identification_Document:")
                  value=(VA,VAL,valu,vv,vvv,vvvv)
                  
-                 cursor.execute(poi,value)
+                 cursor.execute(cust_query,value)
                  conn.commit()
                  print("Added")
        if pl==5:
@@ -110,10 +109,10 @@ def owner():
            for x in M:
                 print("[",x[1],"]","[",x[0],"]",end="\n")
          
-           poi=input("Customer name:")
-           ccopo=input("Customer_Id:")
+           cust_name=input("Customer name:")
+           cust_id=input("Customer_Id:")
            h="DELETE FROM Customer WHERE Cust_Name=%s AND Cust_Id=%s"
-           adr=(poi,ccopo)
+           adr=(cust_name,cust_id)
            
            cursor.execute(h,adr)
            print("Deleted")
@@ -130,7 +129,7 @@ def owner():
                   M=cursor.fetchall()
                   for x in M:
                        print(list(x))
-                  poi="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
+                  cust_query="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
                   VA=input("Cust_Id:")
                   VAL=input("Cust_Name:")
                   valu=input("Age_18_Above:")
@@ -140,7 +139,7 @@ def owner():
                   value=(VA,VAL,valu,vv,vvv,vvvv)
                   
                  
-                  cursor.execute(poi,value)
+                  cursor.execute(cust_query,value)
                   conn.commit()
                   print("Added")
                    
@@ -161,8 +160,8 @@ def owner():
 
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                        print(list(nani))
+                  for something in cccgf:
+                        print(list(something))
 
                   napssss=input("Booking Id")
                   print("                             ROOM TABLE")
@@ -171,21 +170,21 @@ def owner():
                   for nan in ABCDEFG:
                         print(list(nan))     
                   naps=input("Room Id:")
-                  donkey=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
-                  cursor.execute(donkey,napssss)
+                  show_booking_details_query=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
+                  cursor.execute(show_booking_details_query,napssss)
                   OOM=cursor.fetchall()
                   for nanI in OOM:
-                        print(nani)
+                        print(something)
 
-                  baby=(naps,napss,napsss,napssss,VA)
-                  xxx="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
+                  tuple_of_values=(naps,napss,napsss,napssss,VA)
+                  query_to_insert="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
                    
-                  cursor.execute(xxx,baby)
+                  cursor.execute(query_to_insert,tuple_of_values)
                   print("                             BOOKING TABLE")
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                       print(list(nani))
+                  for something in cccgf:
+                       print(list(something))
                   conn.commit()
                   print("Booking done!")
                    
@@ -205,8 +204,8 @@ def owner():
 
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                        print(list(nani))
+                  for something in cccgf:
+                        print(list(something))
 
                   napssss=input("Booking Id")
                   print("                             ROOM TABLE")
@@ -215,11 +214,11 @@ def owner():
                   for nan in ABCDEFG:
                         print(list(nan))     
                   naps=input("Room Id:")
-                  donkey=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
-                  cursor.execute(donkey,napssss)
+                  show_booking_details_query=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
+                  cursor.execute(show_booking_details_query,napssss)
                   OOM=cursor.fetchall()
                   for nanI in OOM:
-                        print(nani)
+                        print(something)
                   cursor.execute("SELECT * FROM Customer ;")
                   M=cursor.fetchall()
                   for x in M:
@@ -227,15 +226,15 @@ def owner():
 
                   VA=input("Cust_Id:")
                   
-                  baby=(naps,napss,napsss,napssss,VA)
-                  xxx="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
+                  tuple_of_values=(naps,napss,napsss,napssss,VA)
+                  query_to_insert="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
                    
-                  cursor.execute(xxx,baby)
+                  cursor.execute(query_to_insert,tuple_of_values)
                   print("                             BOOKING TABLE")
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                       print(list(nani))
+                  for something in cccgf:
+                       print(list(something))
                   conn.commit()
                   print("Booking done!")
 
@@ -244,22 +243,21 @@ def owner():
                   print("                             BOOKING TABLE")
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                        print(list(nani))
+                  for something in cccgf:
+                        print(list(something))
              
                   yuo=input("Booking Id:")
                   iopl="SELECT DATEDIFF(%s,%s)"
-                  donkey=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
-                  cursor.execute(donkey,yuo)
+                  show_booking_details_query=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
+                  cursor.execute(show_booking_details_query,yuo)
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                        MK=list(nani)
-                  #print(MK)
+                  for something in cccgf:
+                        MK=list(something)
                   L123=MK[1]
                   L456=MK[2]
                   van=(L123,L456)
                   nnnnnn=cursor.execute(iopl,van)
-                  #print(nnnnnn+2)
+                  
                   cursor.execute("SELECT * FROM ROOM;")
                   ABCDEFG=cursor.fetchall()
                   for nan in ABCDEFG:
@@ -273,8 +271,6 @@ def owner():
                                 qwerty=anna[2]
                                 ASSSO=anna[3]
                                 abcandance=anna[4]
-                                ILoveAGirl=anna[5]
-                  #print(SP)
                   print("          BBBBBBBBBB   IIIIIIIIIII    LLL       LLL")
                   print("          BBBBBBBBBB   IIIIIIIIIII    LLL       LLL")
                   print("          BBB    BBB       III        LLL       LLL")
@@ -320,7 +316,7 @@ def owner():
                  M=cursor.fetchall()
                  for x in M:
                        print(list(x))
-                 poi="INSERT INTO ROOM(ROOM_ID,ROOM_TYPE,RENT,AC,FRIDGE,No_of_beds,GEYSER) VALUES(%s,%s,%s,%s,%s,%s,%s)"
+                 room_query="INSERT INTO ROOM(ROOM_ID,ROOM_TYPE,RENT,AC,FRIDGE,No_of_beds,GEYSER) VALUES(%s,%s,%s,%s,%s,%s,%s)"
                  VA=input("Room_Id:")
                  VAL=input("Room type:")
                  valu=input("Rent:")
@@ -330,7 +326,7 @@ def owner():
                  vax=input("Geyser:")
                  value=(VA,VAL,valu,vv,vvv,vvvv,vax)
                  
-                 cursor.execute(poi,value)
+                 cursor.execute(room_query,value)
                  conn.commit()
                  print("Added")
        if pl==10:
@@ -339,10 +335,10 @@ def owner():
            for x in M:
                 print("[",x[1],"]","[",x[0],"]",end="\n")
          
-           poi=input("Room name:")
-           ccopo=input("Room_Id:")
+           room_name=input("Room name:")
+           room_id=input("Room_Id:")
            h="DELETE FROM ROOM WHERE ROOM_TYPE=%s AND ROOM_ID=%s"
-           adr=(poi,ccopo)
+           adr=(room_name,room_id)
            
            cursor.execute(h,adr)
            print("Deleted")
@@ -352,10 +348,10 @@ def owner():
                               
                    
 
-       OOO=input("Do you want to continue:(y/n)")
-       if OOO=="Y" or OOO=="y":
+       want_to_continue=input("Do you want to continue:(y/n)")
+       if want_to_continue=="Y" or want_to_continue=="y":
               continue
-       if OOO=="N" or OOO=="n":
+       if want_to_continue=="N" or want_to_continue=="n":
               return
 
 def Employee():
@@ -364,7 +360,7 @@ def Employee():
        pl=int(input("-->"))
 
        if pl==1:
-           poi="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
+           cust_query="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
            VA=input("Cust_Id:")
            VAL=input("Cust_Name:")
            valu=input("Age_18_Above:")
@@ -373,7 +369,7 @@ def Employee():
            vvvv=input("Identification_Document:")
            value=(VA,VAL,valu,vv,vvv,vvvv)
            
-           cursor.execute(poi,value)
+           cursor.execute(cust_query,value)
            conn.commit()
            print("Added")
        if pl==2:
@@ -382,9 +378,9 @@ def Employee():
            for x in M:
                 print("[",x[1],"]",end="\n")
          
-           poi=input("Customer name:")
+           cust_name=input("Customer name:")
            h="DELETE FROM Customer WHERE Cust_Name=%s"
-           adr=(poi,)
+           adr=(cust_name,)
            
            cursor.execute(h,adr)
            print("Deleted")
@@ -398,22 +394,22 @@ def Employee():
                   print("                             BOOKING TABLE")
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                        print(list(nani))
+                  for something in cccgf:
+                        print(list(something))
              
                   yuo=input("Booking Id:")
                   iopl="SELECT DATEDIFF(%s,%s)"
-                  donkey=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
-                  cursor.execute(donkey,yuo)
+                  show_booking_details_query=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
+                  cursor.execute(show_booking_details_query,yuo)
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                        MK=list(nani)
-                  #print(MK)
+                  for something in cccgf:
+                        MK=list(something)
+                  
                   L123=MK[1]
                   L456=MK[2]
                   van=(L123,L456)
                   nnnnnn=cursor.execute(iopl,van)
-                  #print(nnnnnn+2)
+                  
                   cursor.execute("SELECT * FROM ROOM;")
                   ABCDEFG=cursor.fetchall()
                   for nan in ABCDEFG:
@@ -427,8 +423,7 @@ def Employee():
                                 qwerty=anna[2]
                                 ASSSO=anna[3]
                                 abcandance=anna[4]
-                                ILoveAGirl=anna[5]
-                  #print(SP)
+                               
                   print("          BBBBBBBBBB   IIIIIIIIIII    LLL       LLL")
                   print("          BBBBBBBBBB   IIIIIIIIIII    LLL       LLL")
                   print("          BBB    BBB       III        LLL       LLL")
@@ -476,7 +471,7 @@ def Employee():
                   M=cursor.fetchall()
                   for x in M:
                        print(list(x))
-                  poi="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
+                  cust_query="INSERT INTO CUSTOMER(Cust_Id,Cust_Name,Age_18_Above,Cust_Mobile,Cust_Email,Identification_Document) VALUES(%s,%s,%s,%s,%s,%s)"
                   VA=input("Cust_Id:")
                   VAL=input("Cust_Name:")
                   valu=input("Age_18_Above:")
@@ -486,7 +481,7 @@ def Employee():
                   value=(VA,VAL,valu,vv,vvv,vvvv)
                   
                  
-                  cursor.execute(poi,value)
+                  cursor.execute(cust_query,value)
                   conn.commit()
                   print("Added")
                    
@@ -508,8 +503,8 @@ def Employee():
 
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                        print(list(nani))
+                  for something in cccgf:
+                        print(list(something))
 
                   napssss=input("Booking Id")
                   print("                             ROOM TABLE")
@@ -518,21 +513,21 @@ def Employee():
                   for nan in ABCDEFG:
                         print(list(nan))     
                   naps=input("Room Id:")
-                  donkey=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
-                  cursor.execute(donkey,napssss)
+                  show_booking_details_query=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
+                  cursor.execute(show_booking_details_query,napssss)
                   OOM=cursor.fetchall()
                   for nanI in OOM:
-                        print(nani)
+                        print(something)
 
-                  baby=(naps,napss,napsss,napssss,VA)
-                  xxx="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
+                  tuple_of_values=(naps,napss,napsss,napssss,VA)
+                  query_to_insert="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
                    
-                  cursor.execute(xxx,baby)
+                  cursor.execute(query_to_insert,tuple_of_values)
                   print("                             BOOKING TABLE")
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                       print(list(nani))
+                  for something in cccgf:
+                       print(list(something))
                   conn.commit()
                   print("Booking done!")
                    
@@ -552,8 +547,8 @@ def Employee():
 
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                        print(list(nani))
+                  for something in cccgf:
+                        print(list(something))
 
                   napssss=input("Booking Id")
                   print("                             ROOM TABLE")
@@ -562,11 +557,11 @@ def Employee():
                   for nan in ABCDEFG:
                         print(list(nan))     
                   naps=input("Room Id:")
-                  donkey=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
-                  cursor.execute(donkey,napssss)
+                  show_booking_details_query=("SELECT * FROM BOOKING WHERE BOOKING_ID=%s")
+                  cursor.execute(show_booking_details_query,napssss)
                   OOM=cursor.fetchall()
                   for nanI in OOM:
-                        print(nani)
+                        print(something)
                   cursor.execute("SELECT * FROM Customer ;")
                   M=cursor.fetchall()
                   for x in M:
@@ -574,15 +569,15 @@ def Employee():
 
                   VA=input("Cust_Id:")
                   
-                  baby=(naps,napss,napsss,napssss,VA)
-                  xxx="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
+                  tuple_of_values=(naps,napss,napsss,napssss,VA)
+                  query_to_insert="INSERT INTO Booking VALUES(%s,%s,%s,%s,%s)";
                    
-                  cursor.execute(xxx,baby)
+                  cursor.execute(query_to_insert,tuple_of_values)
                   print("                             BOOKING TABLE")
                   cursor.execute("SELECT * FROM BOOKING;")
                   cccgf=cursor.fetchall()
-                  for nani in cccgf:
-                       print(list(nani))
+                  for something in cccgf:
+                       print(list(something))
                   conn.commit()
                   print("Booking done!")
 
@@ -593,27 +588,27 @@ def Employee():
                for x in M:
                     print("[",x[1],"]","[",x[0],"]",end="\n")
              
-               poi=input("Room name:")
-               ccopo=input("Room_Id:")
+               room_name=input("Room name:")
+               room_id=input("Room_Id:")
                h="DELETE FROM ROOM WHERE ROOM_TYPE=%s AND ROOM_ID=%s"
-               adr=(poi,ccopo)
+               adr=(room_name,room_id)
                
                cursor.execute(h,adr)
                print("Deleted")
                conn.commit()
                  
              
-       OOO=input("Do you want to continue:(y/n)")
-       if OOO=="Y" or OOO=="y":
+       want_to_continue=input("Do you want to continue:(y/n)")
+       if want_to_continue=="Y" or want_to_continue=="y":
             continue
        else:
             break
  
 
 
-if aah=="ADMIN":
+if logged_in_user=="ADMIN":
         owner()
-if aah=="EMPLOYEE":
+if logged_in_user=="EMPLOYEE":
         Employee()
 conn.commit()
 conn.close()  
